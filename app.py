@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,jsonify, url_for , redirect,session
-from ExampleSql import familys, passwords
+from example_sql import familys, passwords
 app=Flask(__name__)
 
 @app.route('/')
