@@ -30,8 +30,8 @@ header {
     width: 100px;
     border-radius: 50%;
     border: 1px solid rgb(246, 231, 231);
-    background-size: 105px 90px;
     background-image: url('../sources/image/logo.jpeg');
+    background-size: 101px 89px;
 }
 
 main {

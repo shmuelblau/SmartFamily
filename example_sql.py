@@ -23,7 +23,31 @@ class Task:
         self.titel = titel
 
 
-class sort:
+class Sort:
+
+    def __init__(self, familys, users, tasks):
+        self.__familys = familys
+        self.__users = users
+        self.__tasks = tasks
+
+    def get_family_by_id(self, id):
+        family = [family for family in self.__familys if family.id == id]
+        return family[0]
+     
+    def get_user_by_id(self, id):
+        user = [user for user in self.__users if user.id == id]
+        return user[0]
+
+    def get_users_by_family_id(self, id):
+        return [user for user in self.__users if user.family_id == id]
+
+    def get_task_by_id(self, id):
+        task = [task for task in self.__tasks if task.id == id]
+        return task[0]
+
+    def get_tasks_by_user_id(self, id):
+        return [task for task in self.__tasks if task.user_id == id]
+
     pass
 
 
@@ -34,21 +58,47 @@ def temp():
     familys_names = ['levi', 'khen', 'israel', 'blao']
     tasks_names = ['add', 'throw', 'sleep']
 
-    famliys = []
+    familys = []
     users = []
     tasks = []
     i = j = k = 1
 
     for family in familys_names:
-        famliys.append(Family(i, family, 1436*i))
+        familys.append(Family(i, family, 1436*i))
+
         for name in names:
             users.append(User(j, i, name, family, (1234*i)+j, 34//j))
+
             for task in tasks_names:
-                tasks.append(Task(k,j,task))
+                tasks.append(Task(k, j, task))
+
                 k += 1
             j += 1
         i += 1
 
-    return famliys,users,tasks
+    return familys, users, tasks
 
-famliys,users,tasks = temp()
+
+familys, users, tasks = temp()
+sort = Sort(familys, users, tasks)
+
+
+def sssss():
+    for fam in familys:
+        print(fam.id, fam.Fname, fam.password)
+
+
+
+
+
+# your_project/
+# ├── app.py
+# ├── static/
+# │   ├── css/
+# │   │   └── style.css
+# │   ├── js/
+# │   │   └── script.js
+# │   └── images/
+# │       └── your_image.png
+# └── templates/
+#     └── home.html

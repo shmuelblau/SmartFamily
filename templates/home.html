@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body class="background-icons">
@@ -15,22 +15,31 @@
     </header>
 
     <main>
-    
-        <div class="temp">
-            <div class="temp_border"></div>
-        </div>
+        {%for family in familys%}
+        <form action="{{url_for('family',idfamily=family.id)}}">
+            <button>
+                <div class="temp">
+                    <div class="temp_border">משפחת {{family.Fname}}</div>
+                </div>
+            </button>
+        </form>
 
-        <div class="temp">
-            <div class="temp_border"></div>
-        </div>
 
-        <div class="temp">
-            <div class="temp_border"></div>
-        </div>
+        {%endfor%}
+
+
+        <br><br><br>
+
+        <form method="post">
+            <h1>משפחה חדשה</h1>
+            <input type="text" name="name_family" placeholder="הוסף משפחה חדשה" required>
+            <input type="text" name="code1" placeholder="קוד אבא" required>
+            <input type="text" name="code2" placeholder="קוד אמא" required>
+            <button>הוסף</button>
+        </form>
+
     </main>
-
-
-    <script src="../static/func.js"></script>
+    <script src="../static/js/func.js"></script>
 </body>
 
 </html>
