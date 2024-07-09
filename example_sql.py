@@ -1,18 +1,19 @@
+import copy
 class User:
-    def __init__(self, id, family_id, Fname, Lname, password, age):
+    def __init__(self, id, family_id, first_name, last_name, password, age):
         self.id = id
         self.family_id = family_id
         # self.titel = titel
-        self.Fname = Fname
-        self.Lname = Lname
+        self.first_name = first_name
+        self.last_name = last_name
         self.password = password
         self.age = age
 
 
 class Family:
-    def __init__(self, id, Fname, password='0000'):
+    def __init__(self, id, family_name, password='0000'):
         self.id = id
-        self.Fname = Fname
+        self.family_name = family_name[0].upper()+family_name[1:]
         self.password = password
 
 
@@ -47,17 +48,18 @@ class Sort:
 
     def get_tasks_by_user_id(self, id):
         return [task for task in self.__tasks if task.user_id == id]
+    
+    
 
     pass
 
 
 # temp databaes =>
-
 def temp():
     names = ['david', 'nissim', 'pinhas', 'shmuel', 'haim', 'izthak', 'shlomo', 'yair', 'meir', 'natan']
     familys_names = ['levi', 'khen', 'israel', 'blao']
     tasks_names = ['add', 'throw', 'sleep']
-
+    familys_names = []
     familys = []
     users = []
     tasks = []
@@ -85,9 +87,7 @@ sort = Sort(familys, users, tasks)
 
 def sssss():
     for fam in familys:
-        print(fam.id, fam.Fname, fam.password)
-
-
+        print(fam.id, fam.family_name, fam.password)
 
 
 

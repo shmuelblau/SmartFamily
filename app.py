@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect, session
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate 
 from example_sql import *
 
 
@@ -12,13 +14,16 @@ def start():
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
+
     if request.method == 'POST':
-        name_family = request.form['name_family']
+        family_name = request.form['family_name']
         code1 = request.form['code1']
         code2 = request.form['code2']
-        familys.append(Family(len(familys)+1, name_family))
-        users.append(User(len(users)+1, len(familys),'אבא', name_family, code1))
-        users.append(User(len(users)+1, len(familys),'אמא', name_family, code2))
+        familys.insert(0,Family(len(familys)+1, family_name))
+        users.append(User(len(users)+1, len(familys),'Father', family_name, code1,27))
+        users.append(User(len(users)+1, len(familys),'Mother', family_name, code2,25))
+        
+        return redirect(url_for('home'))
 
     return render_template('home.html', familys=familys)
 
@@ -44,10 +49,10 @@ def family(idfamily):
     return render_template('family.html', this_family=this_family,  users_family=users_family,  family_tasks=family_tasks)
 
 
-@app.route('/kids/<user>', methods=['POST', 'GET'])
-def kids(user):
-    print(user, 2)
-    return render_template('kids.html', user=user, i=22)
+# @app.route('/kids/<user>', methods=['POST', 'GET'])
+# def kids(user):
+#     print(user, 2)
+#     return render_template('kids.html', user=user, i=22)
 
 
 if __name__ == ('__main__'):
