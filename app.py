@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect, session
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate 
-from example_sql import *
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_migrate import Migrate 
+from sql_maneger import *
 
 
 app = Flask(__name__)
@@ -22,7 +22,6 @@ def home():
         familys.insert(0,Family(len(familys)+1, family_name))
         users.append(User(len(users)+1, len(familys),'Father', family_name, code1,27))
         users.append(User(len(users)+1, len(familys),'Mother', family_name, code2,25))
-        
         return redirect(url_for('home'))
 
     return render_template('home.html', familys=familys)

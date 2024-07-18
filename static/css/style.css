@@ -46,13 +46,62 @@ header {
     background-size: 101px 89px;
 }
 
+
+/*  */
+
+
+/* 
+.styled-input {
+    width: 300px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.styled-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.styled-input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.styled-input:focus::placeholder {
+    color: transparent;
+}
+
+.styled-input:focus-within {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+} */
+
+/*  */
+
 .form {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding: 20px;
     margin-top: 20px;
-    gap: 2.5%;
     background-color: rgba(255, 255, 255, 0.616);
     box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
     border-radius: 10px;
@@ -61,6 +110,7 @@ header {
 
 
 main {
+    
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 50px;

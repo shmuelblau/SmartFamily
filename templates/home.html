@@ -14,13 +14,14 @@
     </header>
     <div class="form">
 
-        <form method="post" class="regestret">
-            <h1>משפחה חדשה</h1>
+        <form method="post">
+            <h1 style="text-align: center;">משפחה חדשה</h1><br/>
+            <button>הוסף משפחה</button>
             <input type="text" name="family_name" placeholder="הוסף משפחה חדשה" required>
             <input type="text" name="code1" placeholder="קוד אבא" required>
             <input type="text" name="code2" placeholder="קוד אמא" required>
-            <button>הוסף משפחה</button>
         </form>
+
     </div>
 
     {% if familys | length > 0 %}
