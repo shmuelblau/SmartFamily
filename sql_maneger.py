@@ -14,29 +14,25 @@ class Families:
             'family_name': 'TEXT',
             'password': 'TEXT'
         }
-           
         sql.add_table(self.table_name, self._create_columns_string_for_table())
         self.families_list = self.get_all_families()
 
 
     def _create_columns_string_for_table(self):
-        return ','.join([f'{col} {type}' for col,type in self.col_table_names.items() if col != 'id']) 
+        return ','.join([
+            f'{col} {type}' for col,type in self.col_table_names.items() if col != 'id'
+            ]) 
 
 
     def get_all_families(self) -> list[Family]:
         if sql.is_table_exists(self.table_name):
             families = sql.fetch_all(self.table_name)
             if len(families) > 0:
-                families_list = [Family(family[0], family[1], family[2]) for family in families]
+                families_list = [
+                    Family(family[0], family[1], family[2]) for family in families
+                    ]
                 return families_list
         return []
-
-    def add_family(self, family_name: str, password: str) -> None:
-        """ >>> \'the function automatically append the families_list\'"""
-        sql.add_field(self.table_name, family_name, password)
-        self.families_list.append(
-            Family(sql.fetch_last_one(self.table_name)[0], family_name, password)
-        )
 
     def get_family_by_id(self, id: int) -> Family:
         """be aware: >>> \if family id don't exist the function return -> None type"""
@@ -46,10 +42,20 @@ class Families:
         else:
             return Family(family[0], family[1], family[2])
 
+
+    def add_family(self, family_name: str, password: str) -> None:
+        """ >>> \'the function automatically append the families_list\'"""
+        sql.add_field(self.table_name, family_name, password)
+        self.families_list.append(
+            Family(sql.fetch_last_one(self.table_name)[0], family_name, password)
+            )
+
     def delete_family(self, id: int) -> None:
         """ >>> \'the function automatically refresh the families_list\'"""
         sql.delete_field(self.table_name, id)
-        self.families_list = [family for family in self.families_list if family.id != id]
+        self.families_list = [
+            family for family in self.families_list if family.id != id
+            ]
 
     def update_family(self, id_value: int, column_name: str, new_value: any) -> None:
         """ >>> \'the function automatically refresh the families_list\'"""
@@ -75,14 +81,18 @@ class Users:
 
     
     def _create_columns_string_for_table(self):
-        return ','.join([f'{col} {type}' for col,type in self.col_table_names.items() if col != 'id']) 
+        return ','.join([
+            f'{col} {type}' for col,type in self.col_table_names.items() if col != 'id'
+            ]) 
 
 
     def get_all_users(self) -> list[User]:
         if sql.is_table_exists(self.table_name):
             users = sql.fetch_all(self.table_name)
             if len(users) > 0:
-                users_list = [User(user[0], user[1], user[2], user[3], user[4], user[5], user[6]) for user in users]
+                users_list = [
+                    User(user[0], user[1], user[2], user[3], user[4], user[5], user[6]) for user in users
+                    ]
                 return users_list
         return []
 
@@ -99,7 +109,9 @@ class Users:
         if user == None:
             print('There is no user with this id...')
         else:
-            return User(user[0], user[1], user[2], user[3], user[4], user[5], user[6])
+            return User(
+                user[0], user[1], user[2], user[3], user[4], user[5], user[6]
+                )
 
     def get_users_by_family_id(self, id: int) -> list[User]:
         users = sql.fetch_all_by_foreign_key(self.table_name, 'family_id', id)
@@ -107,7 +119,9 @@ class Users:
             print('There is no user for this family...')
             return []
         else:
-            return [User(user[0], user[1], user[2], user[3], user[4], user[5], user[6] ) for user in users]
+            return [
+                User(user[0], user[1], user[2], user[3], user[4], user[5], user[6] ) for user in users
+                ]
 
     def delete_user(self, id: int) -> None:
         """ >>> \'the function automatically refresh the users_list\'"""
@@ -137,14 +151,18 @@ class Tasks:
         self.tasks_list = self.get_all_tasks()
 
     def _create_columns_string_for_table(self):
-        return ','.join([f'{col} {type}' for col,type in self.col_table_names.items() if col != 'id']) 
+        return ','.join([
+            f'{col} {type}' for col,type in self.col_table_names.items() if col != 'id'
+            ]) 
 
 
     def get_all_tasks(self) -> list[Task]:
         if sql.is_table_exists(self.table_name):
             tasks = sql.fetch_all(self.table_name)
             if len(tasks) > 0:
-                tasks_list = [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks]
+                tasks_list = [
+                    Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks
+                    ]
                 return tasks_list
         return []
 
@@ -169,7 +187,9 @@ class Tasks:
             print('There is no task for this user...')
             return []
         else:
-            return [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks]
+            return [
+                Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks
+                ]
 
     def delete_task(self, id: int) -> None:
         """ >>> \'the function automatically refresh the tasks_list\'"""
@@ -183,20 +203,24 @@ class Tasks:
 
 
 sql.open_db()
+
 families = Families()
 users = Users()
 tasks = Tasks()
-families.add_family('abravanel', 'YZ1436E')
-users.add_user(1,'david','abravanel',25)
-users.add_user(1,'hadar','abravanel',23)
-tasks.add_task(user_id=1,task_name='be a dad',description='to be a good dad',category=1)
-tasks.add_task(1,'be a mam','to be a good mam',1)
-tasks.update_task(2,'user_id',2)
-tasks.delete_task()
 
-# families.update_family(1,fami.col_table_names[2],'TTTTT2')
-# print(users.users_list,tasks.tasks_list)
 sql.close_db()
+
+
+# families.add_family('abravanel', 'YZ1436E')
+# users.add_user(1,'david','abravanel',25)
+# users.add_user(1,'hadar','abravanel',23)
+# tasks.add_task(user_id=1,task_name='be a dad',description='to be a good dad',category=1)
+# tasks.add_task(1,'be a mam','to be a good mam',1)
+# tasks.update_task(2,'user_id',2)
+# tasks.delete_task()
+
+# families.update_family(1,'password','TTTTT2')
+# print(users.users_list,tasks.tasks_list)
 
 
 
