@@ -7,10 +7,10 @@ Web application - for smart family management
 
 # files-structure
 
-├── static/\n
-│   ├── database/\n
-│   │   ├── python_classes/\n
-│   │   │   ├── family.py\n
+<!-- ├── static/
+│   ├── database/
+│   │   ├── python_classes/
+│   │   │   ├── family.py
 │   │   │   ├── user.py
 │   │   │   └── task.py
 │   │   ├── smart_family.db
@@ -24,6 +24,6 @@ Web application - for smart family management
 ├── templates/
 │    └── home.html
 ├── app.py
-└── sql_manager.py
+└── sql_manager.py -->
 
 
