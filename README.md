@@ -7,10 +7,10 @@ Web application - for smart family management
 
 # files-structure
 
-├── static/
-│   ├── database/
-│   │   ├── python_classes/
-│   │   │   ├── family.py
+├── static/\n
+│   ├── database/\n
+│   │   ├── python_classes/\n
+│   │   │   ├── family.py\n
 │   │   │   ├── user.py
 │   │   │   └── task.py
 │   │   ├── smart_family.db
