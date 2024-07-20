@@ -5,6 +5,6 @@ class Family:
         self.password = password
     
     def __repr__(self) -> str:
-        return f'\
+        return f'\n\
 id: {self.id},\
  family name: {self.family_name}\n'

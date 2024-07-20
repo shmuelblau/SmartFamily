@@ -8,7 +8,7 @@ class Task:
         self.status = status
 
     def __repr__(self) -> str:
-        return f'\
+        return f'\n\
 id: {self.id},\
  user id: {self.user_id},\
  task name: {self.task_name},\

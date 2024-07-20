@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect, session
 # from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate 
-from sql_maneger import *
+from sql_maneger import families,users,tasks
 
 
 app = Flask(__name__)
@@ -14,6 +14,7 @@ def start():
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
+    users.add_user()
 
     if request.method == 'POST':
         family_name = request.form['family_name']
