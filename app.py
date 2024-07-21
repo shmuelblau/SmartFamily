@@ -34,6 +34,7 @@ def family(idfamily):
     this_family = families.get_family_by_id(idfamily)
     users_family = users.get_users_by_family_id(idfamily)
     family_tasks = tasks.get_tasks_by_user_id(users_family[0][0])
+
     
 #     if request.method == 'POST':
 #         print('post')
