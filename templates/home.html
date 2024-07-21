@@ -24,9 +24,9 @@
 
     </div>
 
-    {% if familys | length > 0 %}
+    {% if families.families_list | length > 0 %}
     <main>
-        {% for family in familys %}
+        {% for family in families.families_list %}
         <form action="{{ url_for('family', idfamily=family.id) }}">
             <button class="button">
                 <div class="temp">

@@ -102,8 +102,8 @@ header {
     text-align: center;
     padding: 20px;
     margin-top: 20px;
-    border: 10px solid rgb(31, 28, 28);
-    background-color: rgba(255, 255, 255, 0.616);
+    border: 2px solid rgba(255, 253, 253, 0.498);
+    background-color: rgba(255, 255, 255, 0.418);
     backdrop-filter: blur(1px);
     box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
     border-radius: 10px;
@@ -118,7 +118,8 @@ main {
     padding: 50px;
     margin: 30px;
     gap: 2.5%;
-    background-color: rgba(255, 255, 255, 0.616);
+    background-color: rgba(255, 255, 255, 0.461);
+    border: 2px solid rgba(255, 253, 253, 0.498);
     box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
     border-radius: 10px;
     width: 90%;

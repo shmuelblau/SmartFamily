@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect, session
-# from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate 
-# from sql_maneger import families,users,tasks
-from sql_maneger import *
+from sql_maneger import families,users,tasks
+from static.database.sql_management import sql
 
 
 app = Flask(__name__)
@@ -16,25 +14,26 @@ def start():
 @app.route('/home', methods=['POST', 'GET'])
 def home():
     
-
     if request.method == 'POST':
         family_name = request.form['family_name']
+        print(family_name)
         code1 = request.form['code1']
         code2 = request.form['code2']
-        familys.insert(0,Family(len(familys)+1, family_name))
-        users.append(User(len(users)+1, len(familys),'Father', family_name, code1,27))
-        users.append(User(len(users)+1, len(familys),'Mother', family_name, code2,25))
+        families.add_family(str(family_name),'11111')
+        users.add_user(sql.fetch_last_one(families.table_name)[0],'Father', family_name, 27, code1)
+        users.add_user(sql.fetch_last_one(families.table_name)[0],'Mather', family_name, 28, code2)
+
         return redirect(url_for('home'))
 
-    return render_template('home.html', familys=familys)
+    return render_template('home.html', families=families)
 
 
-# @app.route('/family/<idfamily>', methods=['POST', 'GET'])
-# def family(idfamily):
+@app.route('/family/<idfamily>', methods=['POST', 'GET'])
+def family(idfamily):
 
-#     this_family = sort.get_family_by_id(idfamily)
-#     users_family = sort.get_users_by_family_id(idfamily)
-#     family_tasks = sort.get_tasks_by_user_id(idfamily)
+    this_family = families.get_family_by_id(idfamily)
+    users_family = users.get_users_by_family_id(idfamily)
+    family_tasks = tasks.get_tasks_by_user_id(users_family[0][0])
 #     if request.method == 'POST':
 #         print('post')
 #         print(request.form['nam'])
@@ -47,7 +46,7 @@ def home():
 #                 print('pass')
 #                 return redirect(url_for('kids', user=user))
             
-#     return render_template('family.html', this_family=this_family,  users_family=users_family,  family_tasks=family_tasks)
+    return render_template('family.html', this_family=this_family,  users_family=users_family,  family_tasks=family_tasks)
 
 
 # @app.route('/kids/<user>', methods=['POST', 'GET'])
