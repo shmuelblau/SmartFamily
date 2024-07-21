@@ -201,6 +201,15 @@ class Tasks:
         sql.update_field(self.table_name,id_value,column_name,new_value)
         self.tasks_list = self.get_all_tasks()
 
+    def get_tasks_by_family_id(self,family_id: int) -> list[Task]:
+        users_family_id = [user.id for user in users.users_list if user.family_id == family_id]
+        tasks_in_family = []
+        for id in users_family_id:
+            for task in  self.tasks_list:
+                if task.user_id == id:
+                    tasks_in_family.append(task)
+        return tasks_in_family
+
 
 
 families = Families()
