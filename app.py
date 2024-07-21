@@ -25,7 +25,7 @@ def home():
 
         return redirect(url_for('home'))
 
-    return render_template('home.html', families=families)
+    return render_template('home.html', families=families.families_list)
 
 
 @app.route('/family/<idfamily>', methods=['POST', 'GET'])
