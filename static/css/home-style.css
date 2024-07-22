@@ -12,9 +12,9 @@ body {
     background-color: rgb(196, 220, 217);
     background-image: url('../sources/icons/1111.png');
     background-repeat: repeat;
-    background-size: 450px 600px;
+    background-size: 650px 800px;
     /* זמני */
-    animation: moveUp 90000s linear infinite;
+    animation: moveUp 20000s linear infinite;
 }
 
 @keyframes moveUp {
@@ -22,7 +22,7 @@ body {
         background-position: 0 0;
     }
     100% {
-        background-position: 0 +1000000%;
+        background-position: 0 +100000%;
     }
 }
 
@@ -31,10 +31,12 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    width: 100%;
+    height: 140px;
+
     border-bottom: 2px solid rgb(236, 186, 186);
     background-color: rgba(32, 31, 32, 0.927);
-    height: 140px;
-    width: 100%;
 }
 
 .logo {
@@ -47,7 +49,82 @@ header {
 }
 
 
-/* ###### */
+.main {
+    display: flex;
+    flex-direction: column;
+
+    width: 90%;
+    min-width: 250px;
+    height: 400px;
+
+    margin-top: 30px;
+    /* padding: 20px;
+    padding-top: 0; */
+
+    background-color: rgba(255, 255, 255, 0.418);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
+
+    text-align: center;
+    border: 2px solid rgba(255, 253, 253, 0.498);
+    border-radius: 10px;
+}
+
+.main-head{
+    display: flex;
+    align-items: center;
+    direction: rtl;
+
+    width: 100%;
+    height: 50px;
+
+    margin-bottom: 30px;
+
+    border-bottom: 2px solid rgba(255, 253, 253, 0.256);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+
+    background-color:rgba(255, 255, 255, 0.502);
+}
+
+.add-family-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+
+    margin-right: 10px;
+
+    background-image: url('../sources/svg/house-chimney-solid.svg');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 4.5px;
+    border: 3px solid rgba(255, 255, 255, 0.598);
+    border-radius: 4px;
+}
+
+
+.add-family-button:hover{
+    border: 3px solid rgb(255, 255, 255);
+    background-color: rgba(130, 229, 254, 0.292);
+}
+
+
+
+.family-added{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 3px solid rgba(226, 226, 226, 0.586);
+    border-radius: 10px;
+}
+
+
+
+/* add family */
 
 .modal {
     display: none;
@@ -57,18 +134,10 @@ header {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(255, 255, 255, 0.125);
     backdrop-filter: blur(0.1px);
 }
 
-.family-added{
-    margin: 5px;
-    padding: 5px;
-    text-align: center;
-    border: 3px solid rgba(226, 226, 226, 0.586);
-    border-radius: 10px;
-}
 
 .modal-content {
     background-color: #ffffff;
@@ -98,6 +167,8 @@ header {
     cursor: pointer;
 }
 
+/* ###### */
+
 .button {
     padding: 10px 20px;
     font-size: 16px;
@@ -107,62 +178,44 @@ header {
     border: 2px solid white;
     border-radius: 7px;
 }
-.head-main{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
 
-/* ###### */
-
-.form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.family-added{
+    margin: 5px;
+    padding: 5px;
     text-align: center;
-    padding: 20px;
-    margin-top: 20px;
-    border: 2px solid rgba(255, 253, 253, 0.498);
-    background-color: rgba(255, 255, 255, 0.418);
-    backdrop-filter: blur(1px);
-    box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
+    border: 3px solid rgba(226, 226, 226, 0.586);
     border-radius: 10px;
-    width: 90%;
 }
 
 
-main {
-    
+
+.families-body {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 50px;
-    margin-left: 50px;
-    gap: 2.5%;
-    background-color: rgba(255, 255, 255, 0.461);
-    border: 2px solid rgba(255, 253, 253, 0.498);
-    box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
-    border-radius: 10px;
-    width: 90%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    padding: 30px;
+    gap:3.5%;
+
 }
 
-.button {
+.family-button {
     display: flex;
     background-color: rgba(255, 255, 255, 0);
     border: 0;
 }
 
-.temp {
+.family-head {
     width: auto;
-    height: 250px;
+    height: 150px;
     margin-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.785);
     border-radius: 10px;
 }
 
-.temp_border {
+.head_border {
     padding: 10px;
-    width: 238px;
+    width: 150px;
     color: white;
     font-size: 1.5rem;
     background-color: rgba(54, 54, 54, 0.744);
@@ -172,10 +225,13 @@ main {
 }
 
 .bold{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 1rem;
     font-weight: bold;
+    
+}
+
+.first{
+    margin-top: 150px;
 }
 
 .no-families-message {
