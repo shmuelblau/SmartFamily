@@ -198,6 +198,13 @@ header {
     gap:3.5%;
 
 }
+.family-body{
+    width: 13%;
+    height: 130px;
+    background-color: rgba(255, 255, 255, 0.785);
+    border-radius: 10px;
+
+}
 
 .family-button {
     display: flex;
@@ -206,11 +213,7 @@ header {
 }
 
 .family-head {
-    width: auto;
-    height: 150px;
     margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.785);
-    border-radius: 10px;
 }
 
 .head_border {
