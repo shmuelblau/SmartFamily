@@ -46,7 +46,7 @@ class Families:
     def add_family(self, family_name: str, password: str) -> None:
         """ >>> \'the function automatically append to families_list\'"""
         sql.add_field(self.table_name, family_name, password)
-        self.families_list.insert(
+        self.families_list.insert(0,
             Family(sql.fetch_last_one(self.table_name)[0], family_name, password)
             )
 
@@ -99,7 +99,7 @@ class Users:
     def add_user(self, family_id: int, first_name: str, last_name: str, age: int, password: str = '000000', status: float = 0.0) -> None:
         """ >>> \'the function automatically append to users_list\'"""
         sql.add_field(self.table_name, family_id, first_name,last_name, age, password, status)
-        self.users_list.append(
+        self.users_list.insert(0,
             User(sql.fetch_last_one(self.table_name)[0], family_id, first_name, last_name, age, password,status)
         )
 
@@ -169,7 +169,7 @@ class Tasks:
     def add_task(self, user_id: int, task_name: str, description: str, category: int,status: int = 0) -> None:
         """ >>> \'the function automatically append to the tasks_list\'"""
         sql.add_field(self.table_name, user_id, task_name,description, category, status)
-        self.tasks_list.insert(
+        self.tasks_list.insert(0,
             Task(sql.fetch_last_one(self.table_name)[0], user_id, task_name, description, category)
         )
 

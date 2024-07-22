@@ -1,3 +1,6 @@
+/* חלוקה לנושאים ולתתי נושאים: סדר לפי סדר העמוד ולוגיקה */
+
+
 * {
     margin: 0;
     padding: 0;
@@ -9,10 +12,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+
     background-color: rgb(196, 220, 217);
     background-image: url('../sources/icons/1111.png');
     background-repeat: repeat;
     background-size: 650px 800px;
+
     /* זמני */
     animation: moveUp 20000s linear infinite;
 }
@@ -55,9 +61,9 @@ header {
 
     width: 90%;
     min-width: 250px;
-    height: 400px;
 
     margin-top: 30px;
+    margin-bottom: 30px;
     /* padding: 20px;
     padding-top: 0; */
 
@@ -98,14 +104,18 @@ header {
 
     margin-right: 10px;
 
-    background-image: url('../sources/svg/house-chimney-solid.svg');
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    background-position: 4.5px;
     border: 3px solid rgba(255, 255, 255, 0.598);
     border-radius: 4px;
 }
 
+
+.icon-add-family{
+    background-image: url('../sources/svg/house-chimney-solid.svg');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 4.5px;
+    filter:contrast(0.5%);
+}
 
 .add-family-button:hover{
     border: 3px solid rgb(255, 255, 255);
@@ -131,25 +141,34 @@ header {
     position: fixed;
     z-index: 1;
     left: 0;
-    top: 0;
+    top: 2;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.125);
-    backdrop-filter: blur(0.1px);
+    background-color: rgba(255, 255, 255, 0.308);
+    backdrop-filter: blur(0.3px);
 }
 
 
 .modal-content {
     background-color: #ffffff;
     display: grid;
-    margin: 15% auto;
-    padding: 20px;
-    border: 3px solid rgba(226, 226, 226, 0.586);
-    border-radius: 10px;
+    
     width: 80%;
     max-width: 500px;
-    min-width: 250px;
+    min-width: 200px;
+
+    margin: 250px auto;
+    padding: 20px;
+    
+    border: 3px solid rgba(226, 226, 226, 0.586);
     border-radius: 10px;
+    border-radius: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .close {
@@ -167,8 +186,6 @@ header {
     cursor: pointer;
 }
 
-/* ###### */
-
 .button {
     padding: 10px 20px;
     font-size: 16px;
@@ -179,6 +196,20 @@ header {
     border-radius: 7px;
 }
 
+.family-submit{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 3px solid rgba(226, 226, 226, 0.586);
+    border-radius: 10px;
+}
+
+.family-submit:hover{
+    border: 3px solid rgba(226, 226, 226, 0.922);
+    background-color: rgba(214, 250, 251, 0.651);
+
+
+}
 
 .family-added{
     margin: 5px;
@@ -188,31 +219,84 @@ header {
     border-radius: 10px;
 }
 
-
+/* ###### */
 
 .families-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between ;
+    
+}
 
-    padding: 30px;
-    gap:3.5%;
+/* @media (max-width: 1200px){
+    .families-body{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+    .families-body{
+        width: 150px;
+    }
+}
+
+@media (max-width: 1000px){
+    .families-body{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .families-body{
+        width: 150px;
+    }
+}
+
+@media (max-width: 800px){
+    .families-body{
+    grid-template-columns: 1fr 1fr 1fr;
+    }
+    .families-body{
+        width: 150px;
+        
+    }
 
 }
+@media (max-width: 600px){
+    .families-body{
+    grid-template-columns: 1fr 1fr;
+    }
+    .families-body{
+        width: 150px;
+    }
+
+}
+
+@media (max-width: 400px){
+    .families-body{
+    grid-template-columns: 1fr;
+    }
+    .families-body{
+        width: 150px;
+    }
+
+}
+ */
 .family-body{
-    width: 13%;
+    width: 150px;
     height: 130px;
-    background-color: rgba(255, 255, 255, 0.785);
+    margin: 0 20px;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
 
 }
 
 .family-button {
     display: flex;
-    background-color: rgba(255, 255, 255, 0);
+    width: 150px;
+    height: 100%;
+    background-color: rgba(193, 15, 15, 0);
     border: 0;
+
 }
 
 .family-head {
+    width: 150px;
     margin-bottom: 10px;
 }
 
@@ -230,6 +314,7 @@ header {
 .bold{
     font-size: 1rem;
     font-weight: bold;
+    margin-bottom: 20px;
     
 }
 
@@ -245,4 +330,5 @@ header {
     border: 2px dashed #ccc;
     border-radius: 10px;
     margin: 20px 0;
+    
 }

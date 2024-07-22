@@ -20,7 +20,7 @@
                 <input class="family-added" type="text" name="family_name" placeholder="שם משפחה" required>
                 <input class="family-added" type="text" name="code1" placeholder="קוד אבא" required>
                 <input class="family-added" type="text" name="code2" placeholder="קוד אמא" required>
-                <button type="submit" class="family-button">הוסף משפחה</button>
+                <button type="submit" class="family-submit">הוסף משפחה</button>
             </form>
         </div>
     </div>
@@ -28,25 +28,29 @@
     <main class="main">
         <div class="main-head">
             <div>
-                <button class="add-family-button" id="openModalBtn"></button>
+                <button class="add-family-button" id="openModalBtn">
+                    <svg class="icon-add-family"></svg>
+                </button>
             </div>
         </div>
 
         {% if families | length > 0 %}
         <div class="families-body">
             {% for family in families %}
-            <form class="family-body" action="{{ url_for('family', idfamily=family.id) }}">
+            <form action="{{ url_for('family', idfamily=family.id) }}">
+                <div class="family-body">
                 <button class="family-button">
                 <div class="family-head">
                     <div class="head_border"></div>
                 </div>
                 </button>
-                <span class="bold">{{ family.family_name }} </span>
+            </div>
+            <span class="bold">{{ family.family_name }} </span>
             </form>
             {% endfor %}
         </div>
         {% else %}
-        <div class="bold first">
+        <div class="no-family-masseg">
             !עדיין אין משפחות רשומות - היו הראשונים להצטרף
         </div>
         {% endif %}
