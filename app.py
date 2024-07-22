@@ -33,22 +33,69 @@ def family(idfamily):
 
     this_family = families.get_family_by_id(idfamily)
     users_family = users.get_users_by_family_id(idfamily)
-    family_tasks = tasks.get_tasks_by_user_id(users_family[0][0])
-
+    family_tasks = tasks.get_tasks_by_family_id(this_family.id)
     
-#     if request.method == 'POST':
+    
+    if request.method == 'POST':
+         this_family = families.get_family_by_id(idfamily)
+         users_family = users.get_users_by_family_id(idfamily)
+         family_tasks = tasks.get_tasks_by_family_id(this_family.id)
 #         print('post')
-#         print(request.form['nam'])
-#         print(request.form['code'])
+         print(request.form['user_name'])
+         print(request.form['code'])
+         for user in users_family:
+             print(user.first_name,'   ',request.form['user_name'])
+             print(user.password,'   ',request.form['code'])
+#            print(2222, request.form['nam'])
+#            print(request.form['code'], str(user.password))
+             if request.form['user_name'].lower() == user.first_name.lower() and request.form['code'] == str(user.password):
+                 print("עבר ראשון")
+                 if user.first_name.lower()=='Father'.lower() or user.first_name.lower()=='Mather'.lower():
+                      print("עבר שנין")
+                      return redirect(url_for('parents', user_id=user.id))
 
-#         for user in users_family:
-#             print(2222, request.form['nam'])
-#             print(request.form['code'], str(user.password))
-#             if request.form['nam'] == user.Fname and request.form['code'] == str(user.password):
-#                 print('pass')
-#                 return redirect(url_for('kids', user=user))
+                 return redirect(url_for('kids', user_id=user.id))
+
             
     return render_template('family.html', this_family=this_family,  users_family=users_family,  family_tasks=family_tasks)
+
+
+
+@app.route('/parents/<user_id>', methods=['POST', 'GET'])
+def parents(user_id):
+    this_user=users.get_user_by_id(user_id)
+    users_family=users.get_users_by_family_id(this_user.family_id)
+    family_tasks=tasks.get_tasks_by_family_id(this_user.family_id)
+    print(tasks.tasks_list[-1])
+    return render_template('parents.html', this_user=this_user,  users_family=users_family,  family_tasks=family_tasks)
+
+@app.route('/kids/<user_id>', methods=['POST', 'GET'])
+def kids(user_id):
+    this_user=users.get_user_by_id(user_id)
+    user_tasks=tasks.get_tasks_by_user_id(user_id)
+    
+    open_user_tasks=[task for task in user_tasks if task.status == False]
+
+    return render_template('kids.html',this_user=this_user,user_tasks=user_tasks,open_user_tasks=open_user_tasks)
+
+
+@app.route('/add_kids/<user_id>', methods=['POST'])
+def add_kids(user_id):
+    user=users.get_user_by_id(user_id)
+    family=families.get_family_by_id(user.family_id)
+    users.add_user(family.id,request.form['name'],family.family_name, request.form['age'],request.form['password'])
+    
+
+    return redirect(url_for('parents',user_id=user_id))
+    
+@app.route('/add_task/<user_id>', methods=['POST'])
+def add_task(user_id):
+
+    tasks.add_task(request.form['name'],request.form['task_name'],request.form['data'],0)
+
+
+    return redirect(url_for('parents',user_id=user_id))
+
 
 
 # @app.route('/kids/<user>', methods=['POST', 'GET'])

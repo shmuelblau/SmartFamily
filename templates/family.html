@@ -25,5 +25,26 @@
 </div> -->
 
 <div>
-    fffffffffffff
+    <p>ברוכים הבאים למשפחת{{this_family.family_name}}</p>
 </div>
+<div>
+    <p>אנשים במשפחה</p>
+    {%for user in users_family%}
+    <h4>{{user.first_name}}</h4>
+    <h5>גיל:{{user.age}}</h5>
+    {%endfor%}
+</div>
+
+<div>משימות
+    {%for task in family_tasks%}
+    <h4>{{task.task_name}}</h4>
+    <h5>{{task.category}}</h5>
+    {%endfor%}
+</div>
+
+<form method="post">
+            <input type="text" name="user_name" placeholder="שם" required>
+            <input type="text" name="code" placeholder="קוד " required>
+            <button>התחבר</button>
+
+</form>
