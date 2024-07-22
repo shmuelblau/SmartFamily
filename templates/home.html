@@ -5,46 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/home-style.css">
 </head>
 
 <body>
     <header>
         <img id="head" class="logo">
     </header>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <input class="family-added" type="text" name="family_name" placeholder="שם משפחה" required>
+            <input class="family-added" type="text" name="code1" placeholder="קוד אבא" required>
+            <input class="family-added" type="text" name="code2" placeholder="קוד אמא" required>
+            <button class="family-added" method="post">הוסף משפחה</button>
+        </div>
+    </div>
+<!-- 
     <div class="form">
 
-        <form method="post">
-            <h1 style="text-align: center;">משפחה חדשה</h1><br/>
+        <form >
+            <h1 style="text-align: center;">משפחה חדשה</h1><br />
             <button>הוסף משפחה</button>
-            <input type="text" name="family_name" placeholder="הוסף משפחה חדשה" required>
-            <input type="text" name="code1" placeholder="קוד אבא" required>
-            <input type="text" name="code2" placeholder="קוד אמא" required>
         </form>
+        
+    </div>-->
 
-    </div>
 
     {% if families | length > 0 %}
-    <main>
-        {% for family in families %}
-        <form action="{{ url_for('family', idfamily=family.id) }}">
-            <button class="button">
-                <div class="temp">
-                    <div class="temp_border">
-                        משפחת <br />
-                        <span class="bold"> {{ family.family_name }} </span>
+    <div class="head-main">
+        <button id="openModalBtn">Open Modal</button>
+        <main>
+            {% for family in families %}
+            <div action="{{ url_for('family', idfamily=family.id) }}">
+                <button class="button">
+                    <div class="temp">
+                        <div class="temp_border">
+                            משפחת <br />
+                            <span class="bold"> {{ family.family_name }} </span>
+                        </div>
                     </div>
-                </div>
-            </button>
-        </form>
-        {% endfor %}
-    </main>
+                </button>
+            </div>
+            {% endfor %}
+        </main>
+    </div>
         {% else %}
-        <div class="form">
-            !עדיין אין משפחות רשומות - היו הראשונים להצטרף
-        </div>
-        {% endif %}
-    <script src="../static/js/func.js"></script>
+    <div class="form">
+        !עדיין אין משפחות רשומות - היו הראשונים להצטרף
+    </div>
+    {% endif %}
+    <script src="../static/js/home.js"></script>
 </body>
 
 </html>

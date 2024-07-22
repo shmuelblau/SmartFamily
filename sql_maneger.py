@@ -233,37 +233,3 @@ print(families.families_list)
 # sql.add_table('families', 'family_name TEXT', 'password TEXT')
 # sql.add_table('users', 'family_id INTEGER','first_name TEXT','last_name TEXT','status ', 'password TEXT')
 # sql.add_table('tasks', 'user_id INTEGER', 'user_name TEXT', 'password TEXT')
-
-
-# -> ready to delete >>>>>
-
-# sql.add_field('families', 'aabravanelich', 'YZ1436E')
-
-# # # temp databaes =>
-# def temp():
-#     names = ['david', 'nissim', 'pinhas', 'shmuel', 'haim', 'izthak', 'shlomo', 'yair', 'meir', 'natan']
-#     familys_names = ['levi', 'khen', 'israel', 'blao']
-#     tasks_names = ['add', 'throw', 'sleep']
-#     familys_names = []
-#     familys = []
-#     users = []
-#     tasks = []
-#     i = j = k = 1
-
-#     for family in familys_names:
-#         familys.append(Family(i, family, 1436*i))
-
-#         for name in names:
-#             users.append(User(j, i, name, family, (1234*i)+j, 34//j))
-
-#             for task in tasks_names:
-#                 tasks.append(Task(k, j, task))
-
-#                 k += 1
-#             j += 1
-#         i += 1
-
-#     return familys, users, tasks
-
-
-# familys, users, tasks = temp()
