@@ -66,14 +66,15 @@ def parents(user_id):
     this_user=users.get_user_by_id(user_id)
     users_family=users.get_users_by_family_id(this_user.family_id)
     family_tasks=tasks.get_tasks_by_family_id(this_user.family_id)
-    print(tasks.tasks_list[-1])
+    
     return render_template('parents.html', this_user=this_user,  users_family=users_family,  family_tasks=family_tasks)
 
 @app.route('/kids/<user_id>', methods=['POST', 'GET'])
 def kids(user_id):
     this_user=users.get_user_by_id(user_id)
-    user_tasks=tasks.get_tasks_by_user_id(user_id)
     
+    user_tasks=tasks.get_tasks_by_user_id(user_id)
+
     open_user_tasks=[task for task in user_tasks if task.status == False]
 
     return render_template('kids.html',this_user=this_user,user_tasks=user_tasks,open_user_tasks=open_user_tasks)
@@ -82,6 +83,7 @@ def kids(user_id):
 @app.route('/add_kids/<user_id>', methods=['POST'])
 def add_kids(user_id):
     user=users.get_user_by_id(user_id)
+    
     family=families.get_family_by_id(user.family_id)
     users.add_user(family.id,request.form['name'],family.family_name, request.form['age'],request.form['password'])
     
@@ -95,6 +97,17 @@ def add_task(user_id):
 
 
     return redirect(url_for('parents',user_id=user_id))
+
+
+@app.route('/mark_as_done/<task_id>/<user_id>', methods=['POST'])
+def mark_as_done(task_id,user_id):
+    print(tasks.get_task_by_id(task_id).status, "לפני")
+
+    tasks.update_task(task_id,"status",1)
+    print(tasks.get_task_by_id(task_id).status, "אחרי")
+
+    return redirect(url_for('kids',user_id=user_id))
+
 
 
 
