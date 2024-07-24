@@ -134,6 +134,12 @@ class Users:
         sql.update_field(self.table_name,id_value,column_name,new_value)
         self.users_list = self.get_all_users()
 
+    def username_and_password_verification(self, user_id: int, user_name: str, password: str) -> bool:
+        user = sql.fetch_by_id(self.table_name, user_id)
+        if user is not None:
+            return user[2] == user_name and user[-2] == password
+        return False
+
 
 class Tasks:
 
@@ -181,15 +187,18 @@ class Tasks:
         else:
             return Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1)
 
-    def get_tasks_by_user_id(self, id: int) -> Task:
+    def get_tasks_by_user_id(self, id: int, status: bool = None) -> list[Task]:
+        """be aware: >>> \'\n\t> if there is no task with this id the function return -> empty list !\n\t> the function have optional parameter status that return -> list[task] by there status True | False"""
         tasks = sql.fetch_all_by_foreign_key(self.table_name, 'user_id', id)
-        if tasks == None:
+        if tasks is None:
             print('There is no task for this user...')
             return []
-        else:
+        if status is not None:
             return [
-                Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks
+                Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) 
+                for task in tasks if task[5] == int(status)
                 ]
+        return [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks]
 
     def delete_task(self, id: int) -> None:
         """ >>> \'the function automatically refresh the tasks_list\'"""
@@ -201,20 +210,28 @@ class Tasks:
         sql.update_field(self.table_name,id_value,column_name,new_value)
         self.tasks_list = self.get_all_tasks()
 
-    def get_tasks_by_family_id(self,family_id: int) -> list[Task]:
-        users_family_id = [user.id for user in users.users_list if user.family_id == family_id]
-        tasks_in_family = []
-        for id in users_family_id:
-            for task in  self.tasks_list:
-                if task.user_id == id:
-                    tasks_in_family.append(task)
-        return tasks_in_family
+    def get_tasks_by_family_id(self,family_id: int, status: bool = None) -> list[Task]:
+        """be aware: >>> \'\n\t> if there is no task with this id the function return -> empty list !\n\t> the function have optional parameter status that return -> list[task] by there status True | False"""
+        join =  "families JOIN users ON families.id = users.family_id JOIN tasks ON users.id = tasks.user_id"
+        tasks_in_family = sql.fetch_all_by_foreign_key(join,"families.id",f"{family_id}","tasks.*",)
+        if status is not None:
+            return [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) 
+                    for task in tasks_in_family if task[5] == int(status)]
+        return [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) 
+                for task in tasks_in_family]
 
 
 families = Families()
-users = Users()
 tasks = Tasks()
+users = Users()
+# print(tasks.get_tasks_by_family_id(1,True))
+print(families.families_list)
+print(users.users_list)
+print(tasks.tasks_list)
 
+# get dan tasks
+# get undan tasks
+# אחוז משימות של משתמש שבוצעו
 
 
 # families.add_family('abravanel', 'YZ1436E')
@@ -226,8 +243,6 @@ tasks = Tasks()
 # tasks.delete_task()
 
 # families.update_family(1,'password','TTTTT2')
-print(families.families_list)
-
 
 
 # sql.add_table('families', 'family_name TEXT', 'password TEXT')

@@ -1,12 +1,39 @@
 /* חלוקה לנושאים ולתתי נושאים: סדר לפי סדר העמוד ולוגיקה */
 
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
 }
 
+@font-face {
+    font-family: MyCustomFont;
+    src: url('../sources/fonts/Assistant/r.ttf') format('truetype');
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@400;700&display=swap');
+
+.delius-unicase-regular {
+    font-family: "Delius Unicase", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .delius-unicase-bold {
+    font-family: "Delius Unicase", cursive;
+    font-weight: 700;
+    font-style: normal;
+  } */
+
+.font-assistant{
+    font-family: MyCustomFont,Assistant, sans-serif;
+    font-size: 18px;
+}
+  
 
 body {
     display: flex;
@@ -19,19 +46,15 @@ body {
     background-repeat: repeat;
     background-size: 650px 800px;
 
+
     /* זמני */
-    animation: moveUp 20000s linear infinite;
+    animation: moveUp 90000s linear infinite;
 }
 
 @keyframes moveUp {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 0 +100000%;
-    }
+    0% { background-position: 0 0; }
+    100% { background-position: -1000000px -1000000px; }
 }
-
 
 header {
     display: flex;
@@ -54,13 +77,13 @@ header {
     background-size: 101px 89px;
 }
 
-
 .main {
     display: flex;
     flex-direction: column;
 
-    width: 90%;
-    min-width: 250px;
+    width: 92%;
+    min-width: 150px;
+    min-height: 350px;
 
     margin-top: 30px;
     margin-bottom: 30px;
@@ -68,7 +91,7 @@ header {
     padding-top: 0; */
 
     background-color: rgba(255, 255, 255, 0.418);
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(3px);
     box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
 
     text-align: center;
@@ -82,7 +105,6 @@ header {
     direction: rtl;
 
     width: 100%;
-    height: 50px;
 
     margin-bottom: 30px;
 
@@ -95,34 +117,39 @@ header {
 
 .add-family-button{
     display: flex;
-    justify-content: center;
     align-items: center;
 
     cursor: pointer;
     height: 35px;
     width: 35px;
 
-    margin-right: 10px;
-
-    border: 3px solid rgba(255, 255, 255, 0.598);
-    border-radius: 4px;
-}
+    margin: 5px 5px;
 
 
-.icon-add-family{
-    background-image: url('../sources/svg/house-chimney-solid.svg');
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    background-position: 4.5px;
-    filter:contrast(0.5%);
+    /* border: 3px solid rgba(255, 255, 255, 0.598);
+    border-radius: 4px; */
+    background-color: rgb(231, 231, 231);
+
+    border: none;
+    border-radius: 50px;
+
 }
 
 .add-family-button:hover{
-    border: 3px solid rgb(255, 255, 255);
-    background-color: rgba(130, 229, 254, 0.292);
+    background-color: rgb(255, 255, 255);
 }
 
+.icon-add-family:hover{
+    filter: contrast(100) brightness(1.2); /* גוון ובהירות שונים בריחוף */
+}
 
+.icon-add-family {
+    background-image: url('../sources/svg/plus-solid.svg');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 7.5px center; /* שיניתי ל-center כדי למרכז את התמונה */
+    filter: contrast(0.1) brightness(1); /* גוון רגיל */
+}
 
 .family-added{
     margin: 5px;
@@ -132,8 +159,6 @@ header {
     border-radius: 10px;
 }
 
-
-
 /* add family */
 
 .modal {
@@ -141,13 +166,12 @@ header {
     position: fixed;
     z-index: 1;
     left: 0;
-    top: 2;
+    top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.308);
     backdrop-filter: blur(0.3px);
 }
-
 
 .modal-content {
     background-color: #ffffff;
@@ -155,7 +179,7 @@ header {
     
     width: 80%;
     max-width: 500px;
-    min-width: 200px;
+    min-width: 150px;
 
     margin: 250px auto;
     padding: 20px;
@@ -163,12 +187,6 @@ header {
     border: 3px solid rgba(226, 226, 226, 0.586);
     border-radius: 10px;
     border-radius: 10px;
-}
-
-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .close {
@@ -221,6 +239,22 @@ form{
 
 /* ###### */
 
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border: 3px solid rgba(255, 255, 255, 0);
+    border-radius: 30px;
+
+}
+
+form:hover {
+    border: 3px solid rgba(255, 255, 255, 0.763);
+}
+
 .families-body {
     display: flex;
     flex-wrap: wrap;
@@ -229,61 +263,14 @@ form{
     
 }
 
-/* @media (max-width: 1200px){
-    .families-body{
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    }
-    .families-body{
-        width: 150px;
-    }
-}
-
-@media (max-width: 1000px){
-    .families-body{
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-    .families-body{
-        width: 150px;
-    }
-}
-
-@media (max-width: 800px){
-    .families-body{
-    grid-template-columns: 1fr 1fr 1fr;
-    }
-    .families-body{
-        width: 150px;
-        
-    }
-
-}
-@media (max-width: 600px){
-    .families-body{
-    grid-template-columns: 1fr 1fr;
-    }
-    .families-body{
-        width: 150px;
-    }
-
-}
-
-@media (max-width: 400px){
-    .families-body{
-    grid-template-columns: 1fr;
-    }
-    .families-body{
-        width: 150px;
-    }
-
-}
- */
 .family-body{
     width: 150px;
     height: 130px;
-    margin: 0 20px;
+    margin: 0 18px;
+    margin-bottom: 5px;
+
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-
 }
 
 .family-button {
@@ -312,23 +299,14 @@ form{
 }
 
 .bold{
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    margin-bottom: 20px;
     
-}
-
-.first{
-    margin-top: 150px;
 }
 
 .no-families-message {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #333;
     text-align: center;
-    background-color: #f9f9f9;
-    border: 2px dashed #ccc;
-    border-radius: 10px;
-    margin: 20px 0;
-    
+    margin-top: 100px;    
 }

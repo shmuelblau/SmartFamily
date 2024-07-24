@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
-    <title>Document</title>
+    <title>smart family</title>
     <link rel="stylesheet" href="../static/css/home-style.css">
+
 </head>
 
 <body>
@@ -17,10 +18,10 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <form action="{{ url_for('home') }}" method="post">
-                <input class="family-added" type="text" name="family_name" placeholder="שם משפחה" required>
-                <input class="family-added" type="text" name="code1" placeholder="קוד אבא" required>
-                <input class="family-added" type="text" name="code2" placeholder="קוד אמא" required>
-                <button type="submit" class="family-submit">הוסף משפחה</button>
+                <input class="family-added font-assistant" type="text" name="family_name" placeholder="שם משפחה" required>
+                <input class="family-added font-assistant" type="text" name="code1" placeholder="קוד אבא" required>
+                <input class="family-added font-assistant" type="text" name="code2" placeholder="קוד אמא" required>
+                <button type="submit" class="family-submit font-assistant">הוסף משפחה</button>
             </form>
         </div>
     </div>
@@ -39,18 +40,18 @@
             {% for family in families %}
             <form action="{{ url_for('family', idfamily=family.id) }}">
                 <div class="family-body">
-                <button class="family-button">
-                <div class="family-head">
-                    <div class="head_border"></div>
+                    <button class="family-button">
+                        <div class="family-head">
+                            <div class="head_border"></div>
+                        </div>
+                    </button>
                 </div>
-                </button>
-            </div>
-            <span class="bold">{{ family.family_name }} </span>
+                <span class="bold font-assistant">{{ family.family_name }} </span>
             </form>
             {% endfor %}
         </div>
         {% else %}
-        <div class="no-family-masseg">
+        <div class="no-families-message">
             !עדיין אין משפחות רשומות - היו הראשונים להצטרף
         </div>
         {% endif %}

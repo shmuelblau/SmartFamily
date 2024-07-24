@@ -86,9 +86,9 @@ class SqlManagement:
         return one_list
         
 
-    def fetch_all_by_foreign_key(self, table_name: str, column_name: str, foreign_key: int) -> list[tuple]:
+    def fetch_all_by_foreign_key(self, table_name: str, column_name: str, foreign_key: int, columns: str = '*') -> list[tuple]:
         self.open_db()
-        self.execute(f'SELECT * FROM {table_name} WHERE {column_name} = {foreign_key}')
+        self.execute(f'SELECT {columns} FROM {table_name} WHERE {column_name} = {foreign_key}')
         list = self.cursor.fetchall()
         self.close_db()
         return list
