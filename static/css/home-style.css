@@ -1,0 +1,312 @@
+/* חלוקה לנושאים ולתתי נושאים: סדר לפי סדר העמוד ולוגיקה */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: MyCustomFont;
+    src: url('../sources/fonts/Assistant/r.ttf') format('truetype');
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@400;700&display=swap');
+
+.delius-unicase-regular {
+    font-family: "Delius Unicase", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .delius-unicase-bold {
+    font-family: "Delius Unicase", cursive;
+    font-weight: 700;
+    font-style: normal;
+  } */
+
+.font-assistant{
+    font-family: MyCustomFont,Assistant, sans-serif;
+    font-size: 18px;
+}
+  
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    background-color: rgb(196, 220, 217);
+    background-image: url('../sources/icons/1111.png');
+    background-repeat: repeat;
+    background-size: 650px 800px;
+
+
+    /* זמני */
+    animation: moveUp 90000s linear infinite;
+}
+
+@keyframes moveUp {
+    0% { background-position: 0 0; }
+    100% { background-position: -1000000px -1000000px; }
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 140px;
+
+    border-bottom: 2px solid rgb(236, 186, 186);
+    background-color: rgba(32, 31, 32, 0.927);
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 1px solid rgb(246, 231, 231);
+    background-image: url('../sources/image/logo.jpeg');
+    background-size: 101px 89px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    width: 92%;
+    min-width: 150px;
+    min-height: 350px;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+    /* padding: 20px;
+    padding-top: 0; */
+
+    background-color: rgba(255, 255, 255, 0.418);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 8px rgba(90, 89, 89, 0.103);
+
+    text-align: center;
+    border: 2px solid rgba(255, 253, 253, 0.498);
+    border-radius: 10px;
+}
+
+.main-head{
+    display: flex;
+    align-items: center;
+    direction: rtl;
+
+    width: 100%;
+
+    margin-bottom: 30px;
+
+    border-bottom: 2px solid rgba(255, 253, 253, 0.256);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+
+    background-color:rgba(255, 255, 255, 0.502);
+}
+
+.add-family-button{
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+
+    margin: 5px 5px;
+
+
+    /* border: 3px solid rgba(255, 255, 255, 0.598);
+    border-radius: 4px; */
+    background-color: rgb(231, 231, 231);
+
+    border: none;
+    border-radius: 50px;
+
+}
+
+.add-family-button:hover{
+    background-color: rgb(255, 255, 255);
+}
+
+.icon-add-family:hover{
+    filter: contrast(100) brightness(1.2); /* גוון ובהירות שונים בריחוף */
+}
+
+.icon-add-family {
+    background-image: url('../sources/svg/plus-solid.svg');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 7.5px center; /* שיניתי ל-center כדי למרכז את התמונה */
+    filter: contrast(0.1) brightness(1); /* גוון רגיל */
+}
+
+.family-added{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 3px solid rgba(226, 226, 226, 0.586);
+    border-radius: 10px;
+}
+
+/* add family */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(48, 48, 48, 0.548);
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    display: grid;
+    
+    width: 80%;
+    max-width: 500px;
+    min-width: 150px;
+
+    margin: 250px auto;
+    padding: 20px;
+    
+    border: 3px solid rgba(226, 226, 226, 0.586);
+    border-radius: 10px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    direction: rtl;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 7px;
+}
+
+.family-submit{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 3px solid rgba(226, 226, 226, 0.586);
+    border-radius: 10px;
+}
+
+.family-submit:hover{
+    border: 3px solid rgba(226, 226, 226, 0.922);
+    background-color: rgba(214, 250, 251, 0.651);
+
+
+}
+
+.family-added{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 3px solid rgba(226, 226, 226, 0.586);
+    border-radius: 10px;
+}
+
+/* ###### */
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border: 3px solid rgba(255, 255, 255, 0);
+    border-radius: 30px;
+
+}
+
+form:hover {
+    border: 3px solid rgba(255, 255, 255, 0.763);
+}
+
+.families-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between ;
+    
+}
+
+.family-body{
+    width: 150px;
+    height: 130px;
+    margin: 0 18px;
+    margin-bottom: 5px;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.family-button {
+    display: flex;
+    width: 150px;
+    height: 100%;
+    background-color: rgba(193, 15, 15, 0);
+    border: 0;
+
+}
+
+.family-head {
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+.head_border {
+    padding: 10px;
+    width: 150px;
+    color: white;
+    font-size: 1.5rem;
+    background-color: rgba(54, 54, 54, 0.744);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 2px solid rgb(63, 0, 0);
+}
+
+.bold{
+    font-size: 1.1rem;
+    font-weight: bold;
+    
+}
+
+.no-families-message {
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    margin-top: 100px;    
+}

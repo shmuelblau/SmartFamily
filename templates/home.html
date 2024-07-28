@@ -3,48 +3,61 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <title>smart family</title>
+    <link rel="stylesheet" href="../static/css/home-style.css">
+
 </head>
 
 <body>
     <header>
         <img id="head" class="logo">
     </header>
-    <div class="form">
 
-        <form method="post">
-            <h1 style="text-align: center;">משפחה חדשה</h1><br/>
-            <button>הוסף משפחה</button>
-            <input type="text" name="family_name" placeholder="הוסף משפחה חדשה" required>
-            <input type="text" name="code1" placeholder="קוד אבא" required>
-            <input type="text" name="code2" placeholder="קוד אמא" required>
-        </form>
-
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="{{ url_for('home') }}" method="post">
+                <input class="family-added font-assistant" type="text" name="family_name" placeholder="שם משפחה" required>
+                <input class="family-added font-assistant" type="text" name="code1" placeholder="קוד אבא" required>
+                <input class="family-added font-assistant" type="text" name="code2" placeholder="קוד אמא" required>
+                <button type="submit" class="family-submit font-assistant">הוסף משפחה</button>
+            </form>
+        </div>
     </div>
 
-    {% if families | length > 0 %}
-    <main>
-        {% for family in families %}
-        <form action="{{ url_for('family', idfamily=family.id) }}">
-            <button class="button">
-                <div class="temp">
-                    <div class="temp_border">
-                        משפחת <br />
-                        <span class="bold"> {{ family.family_name }} </span>
-                    </div>
+    <main class="main">
+        <div class="main-head">
+            <div>
+                <button class="add-family-button" id="openModalBtn">
+                    <svg class="icon-add-family"></svg>
+                </button>
+            </div>
+        </div>
+
+        {% if families | length > 0 %}
+        <div class="families-body">
+            {% for family in families %}
+            <form action="{{ url_for('family', idfamily=family.id) }}">
+                <div class="family-body">
+                    <button class="family-button">
+                        <div class="family-head">
+                            <div class="head_border"></div>
+                        </div>
+                    </button>
                 </div>
-            </button>
-        </form>
-        {% endfor %}
-    </main>
+                <span class="bold font-assistant">{{ family.family_name }} </span>
+            </form>
+            {% endfor %}
+        </div>
         {% else %}
-        <div class="form">
+        <div class="no-families-message">
             !עדיין אין משפחות רשומות - היו הראשונים להצטרף
         </div>
         {% endif %}
-    <script src="../static/js/func.js"></script>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 
 </html>

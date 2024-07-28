@@ -46,7 +46,7 @@ class Families:
     def add_family(self, family_name: str, password: str) -> None:
         """ >>> \'the function automatically append to families_list\'"""
         sql.add_field(self.table_name, family_name, password)
-        self.families_list.append(
+        self.families_list.insert(0,
             Family(sql.fetch_last_one(self.table_name)[0], family_name, password)
             )
 
@@ -99,7 +99,7 @@ class Users:
     def add_user(self, family_id: int, first_name: str, last_name: str, age: int, password: str = '000000', status: float = 0.0) -> None:
         """ >>> \'the function automatically append to users_list\'"""
         sql.add_field(self.table_name, family_id, first_name,last_name, age, password, status)
-        self.users_list.append(
+        self.users_list.insert(0,
             User(sql.fetch_last_one(self.table_name)[0], family_id, first_name, last_name, age, password,status)
         )
 
@@ -133,6 +133,12 @@ class Users:
         """ >>> \'the function automatically refresh the users_list\'"""
         sql.update_field(self.table_name,id_value,column_name,new_value)
         self.users_list = self.get_all_users()
+
+    def username_and_password_verification(self, user_id: int, user_name: str, password: str) -> bool:
+        user = sql.fetch_by_id(self.table_name, user_id)
+        if user is not None:
+            return user[2] == user_name and user[-2] == password
+        return False
 
 
 class Tasks:
@@ -169,7 +175,7 @@ class Tasks:
     def add_task(self, user_id: int, task_name: str, description: str, category: int,status: int = 0) -> None:
         """ >>> \'the function automatically append to the tasks_list\'"""
         sql.add_field(self.table_name, user_id, task_name,description, category, status)
-        self.tasks_list.append(
+        self.tasks_list.insert(0,
             Task(sql.fetch_last_one(self.table_name)[0], user_id, task_name, description, category)
         )
 
@@ -181,15 +187,18 @@ class Tasks:
         else:
             return Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1)
 
-    def get_tasks_by_user_id(self, id: int) -> Task:
+    def get_tasks_by_user_id(self, id: int, status: bool = None) -> list[Task]:
+        """be aware: >>> \'\n\t> if there is no task with this id the function return -> empty list !\n\t> the function have optional parameter status that return -> list[task] by there status True | False"""
         tasks = sql.fetch_all_by_foreign_key(self.table_name, 'user_id', id)
-        if tasks == None:
+        if tasks is None:
             print('There is no task for this user...')
             return []
-        else:
+        if status is not None:
             return [
-                Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks
+                Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) 
+                for task in tasks if task[5] == int(status)
                 ]
+        return [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) for task in tasks]
 
     def delete_task(self, id: int) -> None:
         """ >>> \'the function automatically refresh the tasks_list\'"""
@@ -201,20 +210,28 @@ class Tasks:
         sql.update_field(self.table_name,id_value,column_name,new_value)
         self.tasks_list = self.get_all_tasks()
 
-    def get_tasks_by_family_id(self,family_id: int) -> list[Task]:
-        users_family_id = [user.id for user in users.users_list if user.family_id == family_id]
-        tasks_in_family = []
-        for id in users_family_id:
-            for task in  self.tasks_list:
-                if task.user_id == id:
-                    tasks_in_family.append(task)
-        return tasks_in_family
+    def get_tasks_by_family_id(self,family_id: int, status: bool = None) -> list[Task]:
+        """be aware: >>> \'\n\t> if there is no task with this id the function return -> empty list !\n\t> the function have optional parameter status that return -> list[task] by there status True | False"""
+        join =  "families JOIN users ON families.id = users.family_id JOIN tasks ON users.id = tasks.user_id"
+        tasks_in_family = sql.fetch_all_by_foreign_key(join,"families.id",f"{family_id}","tasks.*",)
+        if status is not None:
+            return [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) 
+                    for task in tasks_in_family if task[5] == int(status)]
+        return [Task(task[0], task[1], task[2], task[3], task[4], task[5] == 1) 
+                for task in tasks_in_family]
 
 
 families = Families()
-users = Users()
 tasks = Tasks()
+users = Users()
+# print(tasks.get_tasks_by_family_id(1,True))
+print(families.families_list)
+print(users.users_list)
+print(tasks.tasks_list)
 
+# get dan tasks
+# get undan tasks
+# אחוז משימות של משתמש שבוצעו
 
 
 # families.add_family('abravanel', 'YZ1436E')
@@ -226,44 +243,8 @@ tasks = Tasks()
 # tasks.delete_task()
 
 # families.update_family(1,'password','TTTTT2')
-print(families.families_list)
-
 
 
 # sql.add_table('families', 'family_name TEXT', 'password TEXT')
 # sql.add_table('users', 'family_id INTEGER','first_name TEXT','last_name TEXT','status ', 'password TEXT')
 # sql.add_table('tasks', 'user_id INTEGER', 'user_name TEXT', 'password TEXT')
-
-
-# -> ready to delete >>>>>
-
-# sql.add_field('families', 'aabravanelich', 'YZ1436E')
-
-# # # temp databaes =>
-# def temp():
-#     names = ['david', 'nissim', 'pinhas', 'shmuel', 'haim', 'izthak', 'shlomo', 'yair', 'meir', 'natan']
-#     familys_names = ['levi', 'khen', 'israel', 'blao']
-#     tasks_names = ['add', 'throw', 'sleep']
-#     familys_names = []
-#     familys = []
-#     users = []
-#     tasks = []
-#     i = j = k = 1
-
-#     for family in familys_names:
-#         familys.append(Family(i, family, 1436*i))
-
-#         for name in names:
-#             users.append(User(j, i, name, family, (1234*i)+j, 34//j))
-
-#             for task in tasks_names:
-#                 tasks.append(Task(k, j, task))
-
-#                 k += 1
-#             j += 1
-#         i += 1
-
-#     return familys, users, tasks
-
-
-# familys, users, tasks = temp()
