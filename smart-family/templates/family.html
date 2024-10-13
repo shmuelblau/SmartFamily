@@ -1,0 +1,50 @@
+<!-- <div>
+    <h1>ילדים במשפחה</h1>
+    {% for user in users_family%}
+        <h2>{{user.Fname}}</h2>
+
+        <h4>משימות אישיות</h4>
+         {% for task in family_tasks%}
+               {% if task.user_id == user.id%}
+                   <h6>{{task.titel}}</h6>
+               {%endif%}    
+
+        {%endfor%}
+    {%endfor%}
+
+</div>
+
+<div>
+    <form method="POST">
+        <input type="text" name="nam" placeholder="הקלד שם"  required>
+        <input type="text" name="code" placeholder="הקלד סיסמא" required>
+
+
+        <button>התחבר</button>
+    </form>
+</div> -->
+
+<div>
+    <p>ברוכים הבאים למשפחת{{this_family.family_name}}</p>
+</div>
+<div>
+    <p>אנשים במשפחה</p>
+    {%for user in users_family%}
+    <h4>{{user.first_name}}</h4>
+    <h5>גיל:{{user.age}}</h5>
+    {%endfor%}
+</div>
+
+<div>משימות
+    {%for task in family_tasks%}
+    <h4>{{task.task_name}}</h4>
+    <h5>{{task.category}}</h5>
+    {%endfor%}
+</div>
+
+<form method="post">
+            <input type="text" name="user_name" placeholder="שם" required>
+            <input type="text" name="code" placeholder="קוד " required>
+            <button>התחבר</button>
+
+</form>

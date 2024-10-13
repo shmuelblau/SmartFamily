@@ -1,0 +1,41 @@
+<div>
+    {{this_user}}
+    {{users_family[0].first_name}}
+    {{family_tasks}}
+    
+</div>
+<div>
+    <p>אנשים במשפחה</p>
+    {%for user in users_family%}
+    <h4>{{user.first_name}}</h4>
+    <h5>גיל:{{user.age}}</h5>
+    {%endfor%}
+</div>
+<div>משימות
+    {%for task in family_tasks%}
+    <h4>{{task.task_name}}</h4>
+    <h5>{{task.category}}</h5>
+    {%endfor%}
+</div>
+
+
+<form action="{{ url_for('add_kids', user_id=this_user.id) }}" method="POST">
+    <input type="text" name="name" placeholder="שם" required>
+    <input type="text" name="password" placeholder="סיסמא" required>
+    <input type="number" name="age" placeholder="גיל" required>
+    <button type="submit">הוסף ילד</button>
+</form>
+
+<form action="{{ url_for('add_task', user_id=this_user.id) }}" method="POST">
+    <input list="names" name="name" placeholder="שם" required>
+    <datalist id="names">
+        {%for user in users_family%}
+        <option value="{{user.id}}">{{user.first_name}}</option>
+        {%endfor%}
+    </datalist>
+    
+
+    <input type="text" name="task_name" placeholder="שם משימה" required>
+    <input type="text" name="data" placeholder="תיאור משימה" required>
+    <button type="submit"> הוסף משימה</button>
+</form>

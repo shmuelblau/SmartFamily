@@ -1,0 +1,9 @@
+<h1>שלום {{this_user.first_name}}</h1>
+
+<h3>משימות פתוחות</h3>
+{%for task in open_user_tasks%}
+<form action="{{ url_for('mark_as_done', task_id=task.id,user_id=this_user.id) }}" method="post">
+    <h4>{{task.task_name}}</h4>
+    <button type="submit">בוצע</button>
+</form>
+{%endfor%}
